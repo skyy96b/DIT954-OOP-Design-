@@ -1,0 +1,159 @@
+import java.awt.*;
+
+/**
+ * The common parts of a movable car.
+ */
+public abstract class Car implements Movable{
+
+    private int nrDoors; // Number of doors on the car
+    private double enginePower; // Engine power of the car
+    double currentSpeed; // The current speed of the car (TODO check visibility later incase needs protected)
+    private Color color; // Color of the car
+    private String modelName; // The car model name
+
+    private Point position;
+    private Direction direction; 
+    
+    /**
+     * Initiates the Car object
+     * @param doors Amount of doors
+     * @param enginePower Power of the engine
+     * @param color Colour of the car
+     * @param modelName Model of the car
+     * @param startPosition Cars starting point
+     * @param dir The direction the car is facing at the start.
+     */
+    public Car(Point startPosition, Direction dir, int doors, double enginePower, Color color, String modelName){
+        this.nrDoors = doors;
+        this.enginePower = enginePower;
+        this.color = color;
+        this.modelName = modelName;
+    }
+
+    /**
+     * Initiates the Car object
+     * @param doors Amount of doors
+     * @param enginePower Power of the engine
+     * @param color Colour of the car
+     * @param modelName Model of the car
+     */
+    public Car(int doors, double enginePower, Color color, String modelName){
+        this.nrDoors = doors;
+        this.enginePower = enginePower;
+        this.color = color;
+        this.modelName = modelName;
+    }
+    
+    /**
+     * Gets the amount of doors.
+     * @return Returns the value
+     */
+    public int getNrDoors(){
+        return nrDoors;
+    }
+
+    /**
+     * Gets the engine power.
+     * @return Returns the value
+     */
+    public double getEnginePower(){
+        return enginePower;
+    }
+
+    /**
+     * Gets the current speed
+     * @return Returns the value
+     */
+    public double getCurrentSpeed(){
+        return currentSpeed;
+    }
+
+    /**
+     * Fetches the color.
+     * @return Returns the value
+     */
+    public Color getColor(){
+        return color;
+    }
+
+    /**
+     * Sets the color.
+     * @param clr The new colour of the car
+     */
+    public void setColor(Color clr){
+	    color = clr;
+    }
+
+    /**
+     * Starts the engine
+     */
+    public void startEngine(){
+	    currentSpeed = 0.1;
+    }
+
+    /**
+     * Stops the engine
+     */
+    public void stopEngine(){
+	    currentSpeed = 0;
+    }
+    
+    //Part of Open-Closed principle
+    /**
+     * Gets speedfactor.
+     * @return Returns the speedfactor.
+     */
+    abstract double speedFactor();
+
+     /**
+     * Increments speed.
+     * @param amount Increment speed by this amount
+     */
+    abstract void incrementSpeed(double amount);
+
+    /**
+     * Decrements speed.
+     * @param amount Decrement speed by this amount
+     */
+    abstract void decrementSpeed(double amount);
+
+    // TODO fix this method according to lab pm
+    public void gas(double amount){
+        incrementSpeed(amount);
+    }
+
+    // TODO fix this method according to lab pm
+    public void brake(double amount){
+        decrementSpeed(amount);
+    }
+
+    /**
+     * Moves the car in the current {@link #direction} & using the current speed.
+     */
+    public void move(){
+        switch(direction){
+            case NORTH: this.position.y += currentSpeed; break;
+            case EAST: this.position.x += currentSpeed; break;
+            case WEST: this.position.x -= currentSpeed; break;
+            case SOUTH: this.position.y -= currentSpeed; break;
+        }
+    }
+
+    /**
+     * Turns left in relation to current {@link #direction}
+     */
+    public void turnLeft(){
+        this.direction = this.direction.getLeftDirection();
+    }
+
+    /**
+     * Turns right in relation to current {@link #direction}
+     */
+    public void turnRight(){
+        this.direction = this.direction.getRightDirection();
+    }
+
+    //-----------------------
+
+    
+}
