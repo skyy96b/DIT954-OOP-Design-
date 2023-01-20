@@ -12,10 +12,18 @@ public enum Direction {
         this.value = value;
     }
 
+    /**
+     * Gets the direction to the right of the current direction.
+     * @return Returns a direction
+     */
     public Direction getRightDirection(){
         return getDirection(value);
     }
 
+    /**
+     * Gets the direction corresponding to the value given
+     * @return
+     */
     public static Direction getDirection(int value){
         switch(value){
             case 0: return EAST;
@@ -26,6 +34,10 @@ public enum Direction {
         }
     }
 
+    /**
+     * Gets the direction to the left of the current direction.
+     * @return Returns a Direction
+     */
     public Direction getLeftDirection(){
         return getDirection(Math.abs(value - 3) % 4);
     }

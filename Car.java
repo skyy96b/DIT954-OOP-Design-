@@ -117,18 +117,24 @@ public abstract class Car implements Movable{
      */
     abstract void decrementSpeed(double amount);
 
-    // TODO fix this method according to lab pm
+    /**
+     * Puts the foot on the gas
+     * @param amount Higher amount increases the overall speed.
+     */
     public void gas(double amount){
         incrementSpeed(amount);
     }
 
-    // TODO fix this method according to lab pm
+    /**
+     * Puts the foot on the brakes
+     * @param amount Higher amount decreases the overall speed.
+     */
     public void brake(double amount){
         decrementSpeed(amount);
     }
 
     /**
-     * Moves the car in the current {@link #direction} & using the current speed.
+     * Moves the car in the current {@link #direction} and using the current speed.
      */
     public void move(){
         switch(direction){
