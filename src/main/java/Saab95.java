@@ -43,30 +43,5 @@ public class Saab95 extends Car{
         return this.getEnginePower() * 0.01 * turbo;
     }
 
-     /**
-     * {@inheritDoc}
-     */
-    @Override
-    void incrementSpeed(double amount){
-
-        double speed = getCurrentSpeed() + speedFactor() * amount;
-        if(speed > this.getEnginePower() || speed < 0){
-            throw new IllegalArgumentException();
-        }
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
-    }
-
-     /**
-     * {@inheritDoc}
-      * @throws IllegalArgumentException when incorrect range
-     */
-    @Override
-    void decrementSpeed(double amount){
-        double speed = getCurrentSpeed() - speedFactor() * amount;
-        if(speed > this.getEnginePower() || speed < 0){
-            throw new IllegalArgumentException();
-        }
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
-    }
 
 }

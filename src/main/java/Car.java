@@ -112,18 +112,30 @@ public abstract class Car implements Movable{
      */
     abstract double speedFactor();
 
-     /**
-     * Increments speed.
-     * @param amount Increment speed by this amount. In range [0, {@link #enginePower}]
+    /**
+     * {@inheritDoc}
+     * @throws IllegalArgumentException when incorrect range
      */
-    abstract void incrementSpeed(double amount) throws Exception;
+
+    void incrementSpeed(double amount) throws IllegalArgumentException{
+        double speed = Math.min(getCurrentSpeed() + speedFactor() * amount, this.getEnginePower());
+        if(speed > this.getEnginePower() || speed < 0){
+            throw new IllegalArgumentException();
+        }
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, this.getEnginePower());
+    }
 
     /**
-     * Decrements speed.
-     * @param amount Decrement speed by this amount. In range [0, {@link #enginePower}]
+     * {@inheritDoc}
+     * @throws IllegalArgumentException when incorrect range
      */
-    abstract void decrementSpeed(double amount) throws Exception;
-
+    void decrementSpeed(double amount) throws IllegalArgumentException{
+        double speed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+        if(speed > this.getEnginePower() || speed < 0){
+            throw new IllegalArgumentException();
+        }
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+    }
     /**
      * Puts the foot on the gas
      * @param amount Higher amount increases the overall speed. In range [0, 1]

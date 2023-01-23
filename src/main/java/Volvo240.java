@@ -26,30 +26,4 @@ public class Volvo240 extends Car{
         return this.getEnginePower() * 0.01 * trimFactor;
     }
 
-     /**
-     * {@inheritDoc}
-      * @throws IllegalArgumentException when incorrect range
-     */
-    @Override
-    void incrementSpeed(double amount) throws IllegalArgumentException{
-        double speed = Math.min(getCurrentSpeed() + speedFactor() * amount, this.getEnginePower());
-        if(speed > this.getEnginePower() || speed < 0){
-            throw new IllegalArgumentException();
-        }
-	    currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, this.getEnginePower());
-    }
-
-     /**
-     * {@inheritDoc}
-      * @throws IllegalArgumentException when incorrect range
-     */
-    @Override
-    void decrementSpeed(double amount) throws IllegalArgumentException{
-        double speed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-        if(speed > this.getEnginePower() || speed < 0){
-            throw new IllegalArgumentException();
-        }
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-    }
-
 }
