@@ -60,28 +60,28 @@ class CarTest {
     }
 
     @Test
-    void gas() {
+    void gas() throws Exception {
         car.startEngine();
         double speedA = car.getCurrentSpeed();
-        car.gas(1000);
+        car.gas(1);
         double speedB = car.getCurrentSpeed();
         assert(speedB > speedA);
     }
 
     @Test
-    void brake() {
+    void brake() throws Exception {
         car.startEngine();
         double speedA = car.getCurrentSpeed();
-        car.brake(1000);
+        car.brake(1);
         double speedB = car.getCurrentSpeed();
         assert(speedB < speedA);
     }
 
     @Test
-    void move() {
+    void move() throws Exception {
         Point a = car.getPosition();
         car.startEngine();
-        car.gas(1000);
+        car.gas(1);
         car.move();
         Point b = car.getPosition();
         assert(!a.equals(b));

@@ -114,30 +114,41 @@ public abstract class Car implements Movable{
 
      /**
      * Increments speed.
-     * @param amount Increment speed by this amount
+     * @param amount Increment speed by this amount. In range [0, {@link #enginePower}]
      */
-    abstract void incrementSpeed(double amount);
+    abstract void incrementSpeed(double amount) throws Exception;
 
     /**
      * Decrements speed.
-     * @param amount Decrement speed by this amount
+     * @param amount Decrement speed by this amount. In range [0, {@link #enginePower}]
      */
-    abstract void decrementSpeed(double amount);
+    abstract void decrementSpeed(double amount) throws Exception;
 
     /**
      * Puts the foot on the gas
-     * @param amount Higher amount increases the overall speed.
+     * @param amount Higher amount increases the overall speed. In range [0, 1]
+     * @throws IllegalArgumentException when incorrect range
      */
-    public void gas(double amount){
+    public void gas(double amount) throws Exception {
+        if( amount < 0 || amount > 1) throw new IllegalArgumentException("Accepts only range [0, 1]");
+        double speedA = this.getCurrentSpeed();
         incrementSpeed(amount);
+        double speedB = this.getCurrentSpeed();
+        if(speedB < speedA) System.exit(0);
     }
 
     /**
      * Puts the foot on the brakes
-     * @param amount Higher amount decreases the overall speed.
+     * @param amount Higher amount decreases the overall speed. In range [0, 1]
+     * @throws IllegalArgumentException when incorrect range
      */
-    public void brake(double amount){
+    public void brake(double amount) throws Exception
+    {
+        if( amount < 0 || amount > 1) throw new IllegalArgumentException("Accepts only range [0, 1]");
+        double speedA = this.getCurrentSpeed();
         decrementSpeed(amount);
+        double speedB = this.getCurrentSpeed();
+        if(speedB > speedA) System.exit(0);
     }
 
     /**

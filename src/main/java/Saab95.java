@@ -34,6 +34,7 @@ public class Saab95 extends Car{
     
      /**
      * {@inheritDoc}
+      * * @throws IllegalArgumentException when incorrect range
      */
     @Override
     double speedFactor(){
@@ -47,14 +48,24 @@ public class Saab95 extends Car{
      */
     @Override
     void incrementSpeed(double amount){
+
+        double speed = getCurrentSpeed() + speedFactor() * amount;
+        if(speed > this.getEnginePower() || speed < 0){
+            throw new IllegalArgumentException();
+        }
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
 
      /**
      * {@inheritDoc}
+      * @throws IllegalArgumentException when incorrect range
      */
     @Override
     void decrementSpeed(double amount){
+        double speed = getCurrentSpeed() - speedFactor() * amount;
+        if(speed > this.getEnginePower() || speed < 0){
+            throw new IllegalArgumentException();
+        }
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
 
