@@ -30,7 +30,7 @@ class Saab95Test {
     @Test
     void incrementSpeed() {
         int amount = 1;
-        double value = car.getCurrentSpeed() + car.speedFactor() * amount;;
+        double value = Math.min(car.getCurrentSpeed() + car.speedFactor() * amount, car.getEnginePower());
         car.incrementSpeed(amount);
         assert(value == car.getCurrentSpeed());
     }
@@ -38,14 +38,9 @@ class Saab95Test {
     @Test
     void decrementSpeed() {
         int amount = 1;
-        double value =  car.getCurrentSpeed() - car.speedFactor() * amount;;;
-        try{
-            car.decrementSpeed(amount);
-            fail();
-        } catch (Exception e){
-            assert(true);
-        }
-        //assert(value == car.getCurrentSpeed());
+        double value =  Math.max(car.getCurrentSpeed() - car.speedFactor() * amount, 0);
+        car.decrementSpeed(amount);
+        assert(value == car.getCurrentSpeed());
     }
 
     @Test
