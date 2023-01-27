@@ -3,6 +3,7 @@ import java.awt.*;
 /*
  * We created a general Truck class. Because a Truck can have a loading platform.
  * If it has a loading platform. The platform can either be lowered or raised.
+ * All trucks share functionality of speedFactor & lowering & raising their platforms.
  *
  * We chose subclassing instead of composition because Car is abstract per Lab1A. Because
  * speedFactor differs among different implementations of Cars.
