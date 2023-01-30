@@ -1,3 +1,4 @@
+import javax.swing.text.Position;
 import java.awt.*;
 
 /**
@@ -12,7 +13,12 @@ public abstract class Car implements Movable{
     private String modelName; // The car model name
 
     private Point position;
-    private Direction direction; 
+    private Direction direction;
+
+    /**
+     * If car is being transported by a TransportTruck
+     */
+    private Truck transporter;
     
     /**
      * Initiates the Car object
@@ -31,7 +37,14 @@ public abstract class Car implements Movable{
 
         this.position = startPosition;
         this.direction = dir;
-        this.direction = Direction.NORTH;
+    }
+
+    /**
+     * Reflects the position of the transporting truck.
+     * @param truck Truck transporting this car
+     */
+    public void setTransporter(Truck truck){
+        this.transporter = truck;
     }
 
     /**
@@ -201,8 +214,16 @@ public abstract class Car implements Movable{
      * Returns an immutable point of the current position.
      * @return Returns the current position.
      */
-    public Point getPosition(){
-        return new Point(this.position);
+    public Point getPosition() {
+        if (this.transporter == null) {
+            return new Point(this.position);
+        }
+        return new Point(this.transporter.getPosition());//If beings transported keeps same position as transporter
+    }
+
+
+    protected void setPosition(Point pos){
+        this.position = pos;
     }
     //-----------------------
 

@@ -47,7 +47,7 @@ public class Truck<T> extends Car implements IPlatform<T> {
      */
     @Override
     public void raise() {
-        if(this.platform != null){
+        if(this.platform != null && this.getCurrentSpeed() == 0){//If no movement => lowerable
             this.platform.raise();
         }
     }
@@ -57,7 +57,7 @@ public class Truck<T> extends Car implements IPlatform<T> {
      */
     @Override
     public void lower() {
-        if(this.platform != null){
+        if(this.platform != null && this.getCurrentSpeed() == 0){//If no movement => lowerable
             this.platform.lower();
         }
     }

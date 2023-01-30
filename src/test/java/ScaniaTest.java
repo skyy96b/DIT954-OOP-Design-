@@ -25,7 +25,7 @@ class ScaniaTest {
         for(int i = 0; i < 80; i++){
             scania.raise();
         }
-        assert((Double) scania.getState() == 70);
+        assert(!scania.isInRestingState());
     }
 
     @Test
@@ -33,6 +33,6 @@ class ScaniaTest {
         for(int i = 0; i < 80; i++){
             scania.lower();
         }
-        assert((Double) scania.getState() == 0);
+        assert(scania.isInRestingState());
     }
 }

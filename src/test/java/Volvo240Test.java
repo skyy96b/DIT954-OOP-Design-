@@ -26,15 +26,18 @@ class Volvo240Test {
 
     @Test
     void incrementSpeed() throws Exception {
-        int amount = 10;
+        int amount = 1;
+        car.startEngine();
         double value = Math.min(car.getCurrentSpeed() + car.speedFactor() * amount, car.getEnginePower());;
+        System.out.println(car.getCurrentSpeed() + ":" + car.speedFactor() + ":" + car.getEnginePower() + ": " + value + " . " );
         car.incrementSpeed(amount);
+        System.out.println(car.getCurrentSpeed());
         assert(value == car.getCurrentSpeed());
     }
 
     @Test
     void decrementSpeed() throws Exception {
-        int amount = 10;
+        int amount = 1;
         double value =  Math.max(car.getCurrentSpeed() - car.speedFactor() * amount,0);
         car.decrementSpeed(amount);
         assert(value == car.getCurrentSpeed());

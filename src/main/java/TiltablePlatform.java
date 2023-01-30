@@ -15,8 +15,8 @@ public class TiltablePlatform implements IPlatform<Double> {
      * A TiltablePlatform that can be assigned to a car
      * @param car Can be a car or null (when platform not on a truck)
      */
-    public TiltablePlatform(Truck car){
-        this.car = car;
+    public TiltablePlatform(){
+
     }
 
 
@@ -25,9 +25,8 @@ public class TiltablePlatform implements IPlatform<Double> {
      */
     @Override
     public void raise() {
-        if(car != null && car.getCurrentSpeed() == 0){//If no movement => raisable
-            this.angle = Math.min(70, this.angle + 1);
-        }
+        this.angle = Math.min(70, this.angle + 1);
+
     }
 
     /**
@@ -35,9 +34,8 @@ public class TiltablePlatform implements IPlatform<Double> {
      */
     @Override
     public void lower() {
-        if(car != null && car.getCurrentSpeed() == 0){
-            this.angle = Math.max(0, this.angle - 1);
-        }
+        this.angle = Math.max(0, this.angle - 1);
+
     }
 
     @Override

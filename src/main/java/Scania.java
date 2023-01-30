@@ -14,7 +14,7 @@ public class Scania extends Truck implements IPlatform {
      */
     public Scania(Point startPos, Direction dir){
         super(startPos, dir, Color.black, "ScaniaTruck");
-        this.setPlatform(new TiltablePlatform(this));
+        this.setPlatform(new TiltablePlatform());
     }
 
     /**

@@ -25,7 +25,7 @@ class TransportTruckTest {
         for(int i = 0; i < 80; i++){
             scania.raise();
         }
-        assert(this.scania.getCurrentSpeed() == 0 && scania.getState());
+        assert(this.scania.getCurrentSpeed() == 0 && scania.isInRestingState());
     }
 
     @Test
@@ -33,6 +33,6 @@ class TransportTruckTest {
         for(int i = 0; i < 80; i++){
             scania.lower();
         }
-        assert(this.scania.getCurrentSpeed() == 0 && !scania.getState());
+        assert(this.scania.getCurrentSpeed() == 0 && !scania.isInRestingState());
     }
 }
