@@ -22,6 +22,7 @@ class TransportTruckTest {
 
     @Test
     void raise() {
+        scania.stopEngine();//Need to not be moving to be able to lower
         for(int i = 0; i < 80; i++){
             scania.raise();
         }
@@ -30,6 +31,7 @@ class TransportTruckTest {
 
     @Test
     void lower() {
+        scania.stopEngine();//Need to not be moving to be able to lower
         for(int i = 0; i < 80; i++){
             scania.lower();
         }

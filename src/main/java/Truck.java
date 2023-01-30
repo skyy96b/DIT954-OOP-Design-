@@ -44,6 +44,7 @@ public class Truck<T> extends Car implements IPlatform<T> {
 
     /**
      * { @inheritDoc }
+     * Only raises if truck is not moving.
      */
     @Override
     public void raise() {
@@ -53,7 +54,8 @@ public class Truck<T> extends Car implements IPlatform<T> {
     }
 
     /**
-     * { @link }
+     * { @inheritDoc }
+     * Only lowers if truck is not moving.
      */
     @Override
     public void lower() {
@@ -80,7 +82,7 @@ public class Truck<T> extends Car implements IPlatform<T> {
      */
     @Override
     public boolean isInRestingState() {
-        return false;
+        return this.platform.isInRestingState();
     }
 
     /**
