@@ -1,3 +1,4 @@
+package src.main.java;
 import java.awt.*;
 
 /*
@@ -90,7 +91,7 @@ public class Truck<T> extends Car implements IPlatform<T> {
      * @return
      */
     @Override
-    double speedFactor() {
+    public double speedFactor() {
         return this.getEnginePower() * 0.01;
     }
 

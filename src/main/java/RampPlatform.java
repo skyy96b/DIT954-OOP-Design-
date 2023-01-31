@@ -1,7 +1,9 @@
+package src.main.java;
 import javax.swing.text.Position;
 import java.awt.*;
 import java.util.Deque;
 import java.util.LinkedList;
+
 
 public class RampPlatform implements IPlatform<Boolean>, Loadable<Car>  {
 
@@ -13,6 +15,8 @@ public class RampPlatform implements IPlatform<Boolean>, Loadable<Car>  {
     private boolean raised = true;
     private Deque<Car> cars;
     private Truck carWithPlatform;
+
+    private static final int maxCars = 8;
 
     /**
      * A RampPlatform that can be assigned to a car
@@ -73,7 +77,7 @@ public class RampPlatform implements IPlatform<Boolean>, Loadable<Car>  {
      * Unloads the last car which entered the platform.
      *
      * @throws IllegalArgumentException Throws IllegalArgExc. when the ramp is not lowered.
-     * @return Car which was unloaded. Having moved it a little bit away from the ramp.
+     * @return Car which was unloaded. Having moved it a little bit away from the ramp. May return null
      */
     @Override
     public Car unload() {
@@ -82,8 +86,8 @@ public class RampPlatform implements IPlatform<Boolean>, Loadable<Car>  {
         }
 
         Car car = this.cars.poll();//First in last out
-        //Position of car must be that off the transporter when being unloaded
-        car.setPosition(new Point(this.carWithPlatform.getPosition()));
+        if(car == null) return null;
+
         car.setTransporter(null); //Car no longer transported => no longer same position as transporter
         car.move(); //Move the car a little after unloading
 
@@ -100,6 +104,12 @@ public class RampPlatform implements IPlatform<Boolean>, Loadable<Car>  {
      */
     @Override
     public void load(Car o) throws IllegalArgumentException{
+        if(o == null) return;
+
+        if(this.cars.size() >= maxCars){
+            throw new IllegalArgumentException("Max allowed 8 cars.");
+        }
+
         if(this.isDisallowed(o)){
             throw new IllegalArgumentException("Cannot load a TransportTruck unto this platform.");
         }
@@ -112,12 +122,16 @@ public class RampPlatform implements IPlatform<Boolean>, Loadable<Car>  {
         }
 
         o.setTransporter(this.carWithPlatform);//Reflect same position for the car as the truck
-        this.cars.add(o);
+        this.cars.push(o);
     }
 
     @Override
     public boolean isDisallowed(Car t) {
-        if(t instanceof TransportTruck){//A ramp platform cannot load a TransportTruck
+        /*
+         We assume that if a car is not a Truck then it is not too big to be
+         entered into the loading platform. (Which disallows TransportTrucks as required)
+         */
+        if(t instanceof Truck){//A ramp platform cannot load too big vehicles/trucks
             return true;
         }
         return false;

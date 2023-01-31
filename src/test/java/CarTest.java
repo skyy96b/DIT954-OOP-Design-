@@ -1,6 +1,10 @@
+package src.test.java;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import src.main.java.Car;
+import src.main.java.Direction;
+import src.main.java.Volvo240;
 
 import java.awt.*;
 

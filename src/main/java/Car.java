@@ -1,19 +1,16 @@
+package src.main.java;
 import javax.swing.text.Position;
 import java.awt.*;
 
 /**
  * The common parts of a movable car.
  */
-public abstract class Car implements Movable{
+public abstract class Car extends Vehicle{
 
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
-    double currentSpeed; // The current speed of the car (TODO check visibility later incase needs protected)
     private Color color; // Color of the car
     private String modelName; // The car model name
-
-    private Point position;
-    private Direction direction;
 
     /**
      * If car is being transported by a TransportTruck
@@ -30,21 +27,25 @@ public abstract class Car implements Movable{
      * @param dir The direction the car is facing at the start.
      */
     public Car(Point startPosition, Direction dir, int doors, double enginePower, Color color, String modelName){
+        super(dir, startPosition);
         this.nrDoors = doors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-
-        this.position = startPosition;
-        this.direction = dir;
     }
 
     /**
      * Reflects the position of the transporting truck.
-     * @param truck Truck transporting this car
+     * @param truck Truck transporting this car. If the value is null then the car's position
+     *              is set to that of the truck which it is unloaded from.
      */
     public void setTransporter(Truck truck){
+        Truck oldTruck = this.transporter;
         this.transporter = truck;
+        if(this.transporter == null && oldTruck != null){
+            //No longer transported => update position of car to truck
+            this.position = oldTruck.getPosition();
+        }
     }
 
     /**
@@ -55,13 +56,11 @@ public abstract class Car implements Movable{
      * @param modelName Model of the car
      */
     public Car(int doors, double enginePower, Color color, String modelName){
+        super(Direction.NORTH, new Point(0,0));
         this.nrDoors = doors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-
-        this.direction = Direction.NORTH;
-        this.position = new Point(0,0);
     }
     
     /**
@@ -123,14 +122,14 @@ public abstract class Car implements Movable{
      * Gets speedfactor.
      * @return Returns the speedfactor.
      */
-    abstract double speedFactor();
+    public abstract double speedFactor();
 
     /**
      * {@inheritDoc}
      * @throws IllegalArgumentException when incorrect range
      */
 
-    void incrementSpeed(double amount) throws IllegalArgumentException{
+    public void incrementSpeed(double amount) throws IllegalArgumentException{
         double speed = Math.min(getCurrentSpeed() + speedFactor() * amount, this.getEnginePower());
         if(speed > this.getEnginePower() || speed < 0){
             throw new IllegalArgumentException();
@@ -142,7 +141,7 @@ public abstract class Car implements Movable{
      * {@inheritDoc}
      * @throws IllegalArgumentException when incorrect range
      */
-    void decrementSpeed(double amount) throws IllegalArgumentException{
+    public void decrementSpeed(double amount) throws IllegalArgumentException{
         double speed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
         if(speed > this.getEnginePower() || speed < 0){
             throw new IllegalArgumentException();
@@ -177,40 +176,6 @@ public abstract class Car implements Movable{
     }
 
     /**
-     * Moves the car in the current {@link #direction} and using the current speed.
-     */
-    public void move(){
-        switch(direction){
-            case NORTH: this.position.y += currentSpeed; break;
-            case EAST: this.position.x += currentSpeed; break;
-            case WEST: this.position.x -= currentSpeed; break;
-            case SOUTH: this.position.y -= currentSpeed; break;
-        }
-    }
-
-    /**
-     * Turns left in relation to current {@link #direction}
-     */
-    public void turnLeft(){
-        this.direction = this.direction.getLeftDirection();
-    }
-
-    /**
-     * Turns right in relation to current {@link #direction}
-     */
-    public void turnRight(){
-        this.direction = this.direction.getRightDirection();
-    }
-
-    /**
-     * Gets the current direction the car is facing.
-     * @return Returns the current direction
-     */
-    public Direction getDirection(){
-        return this.direction;
-    }
-
-    /**
      * Returns an immutable point of the current position.
      * @return Returns the current position.
      */
@@ -221,10 +186,6 @@ public abstract class Car implements Movable{
         return new Point(this.transporter.getPosition());//If beings transported keeps same position as transporter
     }
 
-
-    protected void setPosition(Point pos){
-        this.position = pos;
-    }
     //-----------------------
 
     

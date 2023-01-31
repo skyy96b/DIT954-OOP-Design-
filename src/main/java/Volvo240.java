@@ -1,3 +1,4 @@
+package src.main.java;
 import java.awt.*;
 
 /**
@@ -22,7 +23,7 @@ public class Volvo240 extends Car{
      * {@inheritDoc}
      */
     @Override
-    double speedFactor(){
+    public double speedFactor(){
         return this.getEnginePower() * 0.01 * trimFactor;
     }
 

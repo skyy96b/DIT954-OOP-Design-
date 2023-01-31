@@ -1,20 +1,13 @@
+package src.main.java;
 
 
-
-/*
-
- *
- * TODO: Think about whether a truck with no platform should be a general/abstract class.
- *  And then use composition for two different implementations of Tiltable.
- *
- */
 
 import java.awt.*;
 
 /**
  * a Transporter Truck. With 2 doors & 200 engine power
  */
-public class TransportTruck extends Truck implements IPlatform {
+public class TransportTruck extends Truck implements IPlatform, Loadable<Car> {
 
     /**
      * Constructs a TransportTruck. With 2 doors & 200 engine power
@@ -51,4 +44,47 @@ public class TransportTruck extends Truck implements IPlatform {
     }
 
 
+
+    /**
+     * Unloads cars from existing loadable platform.
+     * @return The car which last entered the loadable platform(if any exists)
+     */
+    @Override
+    public Car unload() {
+        if(this.platform != null && this.platform instanceof Loadable){
+            return ((Loadable<Car>)  this.platform).unload();
+        } else {
+            return null;
+        }
+
+    }
+
+    /**
+     * Loads cars onto any existing loadable platform.
+     * @param car Load this car unto any existing loadable platform.
+     */
+    @Override
+    public void load(Car car) {
+        if(this.platform != null && this.platform instanceof Loadable){
+            ((Loadable<Car>)  this.platform).load(car);
+        }
+    }
+
+    /**
+     * Checks if an object is compatible with the loading platform.
+     * @param car The object to check if it is disallowed.
+     * @return True if the object is not allowed to be loaded on this platform.
+     */
+    @Override
+    public boolean isDisallowed(Car car) {
+        /*
+           Since a truck in reality can possibly change loading platform.
+           In reality we must dynamically check if the current loading platform
+           is actually loadable before loading cars into it.
+         */
+        if(this.platform != null && this.platform instanceof Loadable){
+            return ((Loadable) this.platform).isDisallowed(car);
+        }
+        return false;
+    }
 }
