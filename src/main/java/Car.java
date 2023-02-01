@@ -1,11 +1,11 @@
-package src.main.java;
+
 import javax.swing.text.Position;
 import java.awt.*;
 
 /**
  * The common parts of a movable car.
  */
-public abstract class Car extends Vehicle{
+public abstract class Car extends Vehicle implements Transportable<Vehicle> { //All cars transportable by all types of vehicles (like FerryBoats and trucks)
 
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
@@ -13,9 +13,9 @@ public abstract class Car extends Vehicle{
     private String modelName; // The car model name
 
     /**
-     * If car is being transported by a TransportTruck
+     * If car is being transported by a Vehicle
      */
-    private Truck transporter;
+    private Vehicle transporter;
     
     /**
      * Initiates the Car object
@@ -35,16 +35,16 @@ public abstract class Car extends Vehicle{
     }
 
     /**
-     * Reflects the position of the transporting truck.
-     * @param truck Truck transporting this car. If the value is null then the car's position
-     *              is set to that of the truck which it is unloaded from.
+     * Reflects the position of the transporting vehicle.
+     * @param transporter Vehicle(perhaps truck/ferry) transporting this car. If the value is null then the car's position
+     *              is set to that of the transporter which it is unloaded from.
      */
-    public void setTransporter(Truck truck){
-        Truck oldTruck = this.transporter;
-        this.transporter = truck;
-        if(this.transporter == null && oldTruck != null){
+    public void setTransporter(Vehicle transporter){
+        Vehicle oldTransporter = this.transporter;
+        this.transporter = transporter;
+        if(this.transporter == null && oldTransporter != null){
             //No longer transported => update position of car to truck
-            this.position = oldTruck.getPosition();
+            this.position = oldTransporter.getPosition();
         }
     }
 
@@ -179,6 +179,7 @@ public abstract class Car extends Vehicle{
      * Returns an immutable point of the current position.
      * @return Returns the current position.
      */
+    @Override
     public Point getPosition() {
         if (this.transporter == null) {
             return new Point(this.position);

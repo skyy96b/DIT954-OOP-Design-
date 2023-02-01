@@ -1,4 +1,4 @@
-package src.main.java;
+
 
 import javax.swing.text.Position;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * A Vehicle which can move, turn etc..
  */
-public abstract class Vehicle implements IVehicle, Movable{
+public abstract class Vehicle implements Movable{
 
     private Direction direction;
     protected Point position; //Protected bcause needed in subclasses (.ie car)

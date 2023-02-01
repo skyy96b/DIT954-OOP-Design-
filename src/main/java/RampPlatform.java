@@ -1,11 +1,11 @@
-package src.main.java;
+
 import javax.swing.text.Position;
 import java.awt.*;
 import java.util.Deque;
 import java.util.LinkedList;
 
 
-public class RampPlatform implements IPlatform<Boolean>, Loadable<Car>  {
+public class RampPlatform implements IPlatform<Boolean>, Loadable<Car> {
 
 
     /**
@@ -31,7 +31,7 @@ public class RampPlatform implements IPlatform<Boolean>, Loadable<Car>  {
 
 
     /**
-     * Raises the platform by 1 degree. If angle > 70 it is unchanged.
+     * Raises the platformd.
      */
     @Override
     public void raise() {
@@ -39,7 +39,7 @@ public class RampPlatform implements IPlatform<Boolean>, Loadable<Car>  {
     }
 
     /**
-     * Lowers the platform by 1 degree. If angle <= 0 then it is set to 0.
+     * Lowers the platform
      */
     @Override
     public void lower() {

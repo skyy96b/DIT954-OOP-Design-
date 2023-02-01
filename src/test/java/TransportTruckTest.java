@@ -2,14 +2,11 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.main.java.Direction;
-import src.main.java.TransportTruck;
 
 import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import src.main.java.*;
 
 class TransportTruckTest {
 

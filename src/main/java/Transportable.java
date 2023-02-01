@@ -1,9 +1,17 @@
-package src.main.java;
+import java.awt.*;
+
 /**
  * Contract for being transportable (as in contrast to being Loadable, i.e can load transportables)
  */
-public interface Transportable {
+public interface Transportable<T> {
 
-    public void setTransporter(IVehicle transporter);
+    /**
+     * Being transportable. Setting the transporter of this object.
+     * Usually meaning that the position of transportee should reflect the transporter.
+     * @param transporter
+     */
+    public void setTransporter(T transporter);
+
+    public Point getPosition();
 
 }

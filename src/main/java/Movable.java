@@ -1,4 +1,4 @@
-package src.main.java;
+
 
 /**
  * Represents being movable in some directon.

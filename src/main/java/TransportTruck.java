@@ -1,4 +1,4 @@
-package src.main.java;
+
 
 
 
@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * a Transporter Truck. With 2 doors & 200 engine power
  */
-public class TransportTruck extends Truck implements IPlatform, Loadable<Car> {
+public class TransportTruck extends Truck implements IPlatform, ITransporter<Car> {
 
     /**
      * Constructs a TransportTruck. With 2 doors & 200 engine power

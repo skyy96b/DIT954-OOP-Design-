@@ -1,4 +1,4 @@
-package src.main.java;
+
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FerryBoat<T extends Car> extends Vehicle implements Loadable<T> {//Moveable & Loadable in common between Ferry and TransportTruck
+public class FerryBoat<T extends Car> extends Vehicle implements ITransporter<T> {//Moveable & Loadable in common between Ferry and TransportTruck
 
 
     private int capacity;

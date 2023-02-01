@@ -1,4 +1,4 @@
-package src.main.java;
+
 import java.util.*;
 
 /**
@@ -8,32 +8,33 @@ public class Workshop<T extends Car> implements Loadable<T> {
 
     private int capacity;
 
-    private List<T> cars;
+    private Map<T, T> cars;//We see the key (the car object) as having the key to fetch out the car in the workshop
 
     public Workshop(int capacity){
-        this.cars = new ArrayList<>();
+        this.cars = new HashMap<>();
         this.capacity = capacity;
     }
 
-    private int fetchNext = 0;
+    private T fetchNext = null;
 
     /**
      * Tells the Workshop which car to unload next . When
      * using {@link #unload()}
-     * @param id
+     * @param toFetch The car to fetch next from the workshop
      */
-    public void setNextCarToFetch(int id){
-        this.fetchNext = id;
+    public void setNextCarToFetch(T toFetch){
+        this.fetchNext = toFetch;
     }
 
     /**
-     * Unloads the car which was told to be fetched by {@link #setNextCarToFetch(int)}.
+     * Unloads the car which was told to be fetched by {@link #setNextCarToFetch(T)}.
      *
      * @return Car which was unloaded. May return null.
      */
     @Override
     public T unload() {//T represents the most specific static type
-        return this.cars.get(this.fetchNext);
+        if(this.fetchNext == null) throw new IllegalArgumentException("Cannot unload NULL.");
+        return this.cars.remove(this.fetchNext);
     }
 
 
@@ -57,7 +58,7 @@ public class Workshop<T extends Car> implements Loadable<T> {
             throw new IllegalArgumentException("The workshop is full!");
         }
 
-        this.cars.add(o);
+        this.cars.put(o,o);
     }
 
     @Override
