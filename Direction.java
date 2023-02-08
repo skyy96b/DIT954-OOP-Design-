@@ -17,7 +17,7 @@ public enum Direction {
      * @return Returns a direction
      */
     public Direction getRightDirection(){
-        return getDirection(value);
+        return getDirection(Math.abs(value + 5) % 4);
     }
 
     /**
@@ -26,10 +26,10 @@ public enum Direction {
      */
     public static Direction getDirection(int value){
         switch(value){
-            case 0: return EAST;
-            case 1: return SOUTH;
-            case 2: return WEST;
-            case 3: return NORTH;
+            case 0: return NORTH;
+            case 1: return EAST;
+            case 2: return SOUTH;
+            case 3: return WEST;
             default: return NORTH;
         }
     }
@@ -39,7 +39,7 @@ public enum Direction {
      * @return Returns a Direction
      */
     public Direction getLeftDirection(){
-        return getDirection(Math.abs(value - 3) % 4);
+        return getDirection(Math.abs(value + 3) % 4);
     }
 
 }
