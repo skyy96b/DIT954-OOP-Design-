@@ -154,11 +154,14 @@ public abstract class Car extends Vehicle implements Transportable<Vehicle> { //
      * @throws IllegalArgumentException when incorrect range
      */
     public void gas(double amount) throws Exception {
-        if( amount < 0 || amount > 1) throw new IllegalArgumentException("Accepts only range [0, 1]");
-        double speedA = this.getCurrentSpeed();
-        incrementSpeed(amount);
-        double speedB = this.getCurrentSpeed();
-        if(speedB < speedA) System.exit(0);
+        if( amount < 0 || amount > 1){
+            throw new IllegalArgumentException("Accepts only range [0, 1]");
+        } else {
+            double speedA = this.getCurrentSpeed();
+            incrementSpeed(amount);
+            double speedB = this.getCurrentSpeed();
+            if(speedB < speedA) System.exit(0);
+        }
     }
 
     /**

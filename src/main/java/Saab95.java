@@ -19,6 +19,12 @@ public class Saab95 extends Car{
         stopEngine();
     }
 
+    public Saab95(int x, int y){
+        super(new Point(x, y), Direction.NORTH, 2, 125, Color.RED, "Saab95");
+        turboOn = false;
+        stopEngine();
+    }
+
     /**
      * Turn on turbo
      */
