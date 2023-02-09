@@ -1,3 +1,4 @@
+package src.main.java;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -80,7 +81,7 @@ public class CarController {
         for (Car car : cars
                 ) {
             car.gas(gas);
-            System.out.println(car.getCurrentSpeed());
+            //System.out.println(car.getCurrentSpeed());
         }
     }
 
@@ -90,7 +91,43 @@ public class CarController {
         for (Car car : cars
         ) {
             car.brake(gas);
-            System.out.println(car.getCurrentSpeed());
+            //System.out.println(car.getCurrentSpeed());
+        }
+    }
+
+    /**
+     *
+     * @param setOn True sets turbo on. Otherwise to off
+     */
+    void setTurbo(boolean setOn) {
+        for (Car car : cars) {
+            if(car instanceof Saab95){
+                Saab95 saab = (Saab95) car;
+                if(setOn){
+                    saab.setTurboOn();
+                } else {
+                    saab.setTurboOff();
+                }
+            }
+        }
+    }
+    void raisePlatform() {
+        for (Car car : cars
+        ) {
+            if(car instanceof IPlatform<?>){
+                IPlatform scania = (IPlatform) car;
+                scania.raise();
+            }
+        }
+    }
+
+    void lowerPlatform() {
+        for (Car car : cars
+        ) {
+            if(car instanceof Scania){
+                Scania scania = (Scania) car;
+                scania.lower();
+            }
         }
     }
 
