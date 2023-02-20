@@ -1,0 +1,34 @@
+CarController anropar modellen, men CarController's ansvar inkluderar inte att lyssna
+efter användarinput (i ursprungliga MVC). User input kommer istället via CarView som sedan anropar
+CarController vilket inte följer MVC.
+
+CarController hade även en Timer som använde DrawPanel via CarView och bröt därmed Law of Demeter.
+CarController's ansvar ska inte vara att: varken uppdatera applikationen eller repainta DrawPanel.
+
+Förutom det så var inte klasserna indelade i Packages: Model, View & Controller.
+
+
+----------------------
+
+Controllern borde gjorts tunnare (den gjorde för mycket saker den inte skulle)
+CarView:n skulle gjorts dummare & färre beräkningar. Den lyssnar efter användarinput och kontaktade
+CarController till exempel. 
+Modellen hade vi gjort, så där fanns inga större problem. Eftersom allt bara var relaterat
+till modellen och smarta beräkningar.
+
+--------------------------------
+
+Vi åtgärdade i princip inga brister helt och hållet med den nya designen med tanke på UML.
+
+Det vi förbättrade var att flytta Timer & TimerListener till CarView's mainmethod (som en sorts applikationstartare).
+Vi flyttade också så att CarController inte vet något om CarView längre.
+
+DrawPanel skapas nu istället i static main och injiceras till Timer i static main.
+DrawPanel injiceras också till CarView via dess konstruktor. För att kunna uppnå att
+Timer inte behöver vara inuti CarController eller CarView (utan snarare en del av applikationen).
+För detta krävs att DrawPanel skapas i applikationen så Timern också har tillgång till den.
+
+Vi åtgärdade inte så att CarController faktiskt behandlar användarinput i sig själv och säger åt
+modellen vad som den bör göra. Just nu gör säger den åt modellen vad som bör hända. Men CarView
+lyssnar efter användarinput och kontaktar CarController.
+
