@@ -2,10 +2,10 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import src.main.java.Model.Direction;
+import src.main.java.Model.Scania;
 
 import java.awt.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ScaniaTest {
 
