@@ -1,3 +1,8 @@
+
+Uppgift 2
+---------------------
+
+
 CarController anropar modellen, men CarController's ansvar inkluderar inte att lyssna
 efter användarinput (i ursprungliga MVC). User input kommer istället via CarView som sedan anropar
 CarController vilket inte följer MVC.
@@ -32,3 +37,26 @@ Vi åtgärdade inte så att CarController faktiskt behandlar användarinput i si
 modellen vad som den bör göra. Just nu gör säger den åt modellen vad som bör hända. Men CarView
 lyssnar efter användarinput och kontaktar CarController.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ingen specifik uppgift: (lite övrigt)
+--------------------------
+
+Factory Method skulle hjälpa oss om vi vill frigöra beroenden och använder polymorfism.
+Dock gynnar den inte oss speciellt mycket då våra subklasser har utökad funktionalitet i vissa fall.
+T.e.x kan vi inte returnera en abstraktion "Car" när vi gör createSaab95() i CarFactory. Då hade vi inte kunnat använda
+turbon. Samma sak gäller TransportTruck som till skillnad från Scania faktiskt kan transportera bilar (utökad funktionalitet)
+
+En fördel är att vi skulle kunna skapa nya konstruktorer som inte nödvändigtvis är en del av klassen de berör.
+Till exempel skapa en Volvo240 och låta Factory bestämma dess värden. 
